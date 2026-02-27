@@ -11,7 +11,7 @@ const navLinks = [
     href: "#about",
     hasDropdown: true,
     subLinks: [
-      "bayanOverview",
+      "bataraOverview",
       "visionMission",
       "fromPresident",
       "corporateStructure",
@@ -25,11 +25,11 @@ const navLinks = [
     key: "coalHauling",
     href: "#coal-hauling",
     hasDropdown: true,
-    subLinks: ["bayanOverview", "fleet", "operations", "services", "contact"],
+    subLinks: ["fleet", "operations"],
   },
   {
     key: "ourTeam",
-    href: "#our-team",
+    href: "/our-team",
     hasDropdown: true,
     subLinks: ["leadership", "departments", "careers", "organization", "contact"],
   },
@@ -37,7 +37,7 @@ const navLinks = [
     key: "projects",
     href: "#projects",
     hasDropdown: true,
-    subLinks: ["currentProjects", "completedProjects", "bayanOverview", "contact", "news"],
+    subLinks: ["currentProjects", "completedProjects", "usersExperience", "contact", "news"],
   },
 ] as const;
 
@@ -323,7 +323,7 @@ export default function Navbar() {
                         {link.subLinks?.map((subKey) => (
                           <Link
                             key={subKey}
-                            href={`#${subKey}`}
+                            href={subKey === "fleet" ? "/our-fleet" : subKey === "operations" ? "/operations" : subKey === "leadership" ? "/our-team" : subKey === "departments" ? "/departments" : subKey === "careers" ? "/careers" : subKey === "organization" ? "/organization" : subKey === "contact" ? "/contact" : `#${subKey}`}
                             className="relative z-10 text-sm text-zinc-700 transition-colors hover:text-orange-500"
                             onClick={() => setOpenNavDropdown(null)}
                           >
