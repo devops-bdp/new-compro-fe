@@ -37,7 +37,7 @@ const navLinks = [
     key: "projects",
     href: "#projects",
     hasDropdown: true,
-    subLinks: ["currentProjects", "completedProjects", "bayanOverview", "contact"],
+    subLinks: ["currentProjects", "completedProjects", "bayanOverview", "contact", "news"],
   },
 ] as const;
 
@@ -277,8 +277,22 @@ export default function Navbar() {
                   }}
                   onMouseLeave={scheduleClose}
                 >
-                  <div className="min-h-[50vh] rounded-2xl border border-zinc-100 bg-white p-10 shadow-xl">
-                    <div className="flex gap-10">
+                  <div className="relative min-h-[50vh] overflow-hidden rounded-2xl border border-zinc-100 p-10 shadow-xl">
+                    {/* Background image - positioned from right */}
+                    <div className="pointer-events-none absolute inset-0">
+                      <Image
+                        src="/BG_CARD%20HOVER_NAVBAR.png"
+                        alt=""
+                        fill
+                        className="object-cover object-right"
+                      />
+                    </div>
+                    {/* Light overlay from left - fades to show graphic on right */}
+                    <div
+                      className="pointer-events-none absolute inset-0 bg-linear-to-r from-white via-white/90 to-white/40"
+                      aria-hidden
+                    />
+                    <div className="relative flex gap-10">
                       {/* Left: Image + description */}
                       <div className="flex-1 min-w-0">
                         <div className="aspect-video w-full overflow-hidden rounded-lg bg-zinc-100">
@@ -304,47 +318,8 @@ export default function Navbar() {
                           {t("learnMore")}...
                         </Link>
                       </div>
-                      {/* Right: Link list + line graph decorative */}
+                      {/* Right: Link list */}
                       <div className="relative flex flex-1 flex-col gap-3 pl-4">
-                        {/* Orange circular line graph - decorative */}
-                        <svg
-                          className="absolute -right-12 top-1/2 h-56 w-56 -translate-y-1/2 opacity-50"
-                          viewBox="0 0 100 100"
-                          fill="none"
-                          aria-hidden
-                        >
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r="42"
-                            stroke="#f97316"
-                            strokeWidth="1.5"
-                            strokeDasharray="65 200"
-                          />
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r="32"
-                            stroke="#fb923c"
-                            strokeWidth="1"
-                            strokeDasharray="50 150"
-                          />
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r="22"
-                            stroke="#fdba74"
-                            strokeWidth="1"
-                            strokeDasharray="35 100"
-                          />
-                          <path
-                            d="M50 50 L50 12 Q75 25 85 50 Q75 75 50 88"
-                            stroke="#ea580c"
-                            strokeWidth="2"
-                            fill="none"
-                            strokeLinecap="round"
-                          />
-                        </svg>
                         {link.subLinks?.map((subKey) => (
                           <Link
                             key={subKey}
