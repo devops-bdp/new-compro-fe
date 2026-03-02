@@ -14,9 +14,6 @@ const navLinks = [
       "bataraOverview",
       "visionMission",
       "fromPresident",
-      "corporateStructure",
-      "organization",
-      "corporateGovernance",
       "awardsRecognition",
       "contact",
     ],
@@ -323,7 +320,7 @@ export default function Navbar() {
                         {link.subLinks?.map((subKey) => (
                           <Link
                             key={subKey}
-                            href={subKey === "fleet" ? "/our-fleet" : subKey === "operations" ? "/operations" : subKey === "leadership" ? "/our-team" : subKey === "departments" ? "/departments" : subKey === "careers" ? "/careers" : subKey === "organization" ? "/organization" : subKey === "contact" ? "/contact" : `#${subKey}`}
+                            href={subKey === "bataraOverview" ? "/" : subKey === "fleet" ? "/our-fleet" : subKey === "operations" ? "/operations" : subKey === "leadership" ? "/our-team" : subKey === "departments" ? "/departments" : subKey === "careers" ? "/careers" : subKey === "organization" ? "/organization" : subKey === "contact" ? "/contact" : `#${subKey}`}
                             className="relative z-10 text-sm text-zinc-700 transition-colors hover:text-orange-500"
                             onClick={() => setOpenNavDropdown(null)}
                           >
