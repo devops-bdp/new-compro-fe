@@ -51,6 +51,26 @@ const translations: Record<Language, Record<string, string>> = {
     corporateGovernance: "Corporate Governance",
     awardsRecognition: "Awards & Recognition",
     contact: "Contact",
+    aboutUs: "ABOUT US",
+    aboutUsParagraph1:
+      "Bayan Resources operates in the open-cut mining sector with four major projects located in East and South Kalimantan, Indonesia.",
+    aboutUsParagraph2:
+      "As an integrated coal producer, Bayan produces coal ranging from high-calorific bituminous coal to low-sulfur and low-ash sub-bituminous coal.",
+    statsTitle: "OUR PRODUCTION CONTINUES TO GROW",
+    millionTons: "MILLION TONS",
+    siteLocationsTitle: "OUR SITE LOCATIONS",
+    province: "Province",
+    regency: "Regency",
+    senyiurSiteName: "Senyiur",
+    senyiurSiteDesc:
+      "Senyiur is one of the villages in Muara Ancalong District, Kutai Timur Regency, East Kalimantan Province. PT Batara Dharma Persada operates coal hauling services in this area.",
+    senyiurSiteProvince: "East Kalimantan",
+    senyiurSiteRegency: "Kutai Timur",
+    muarapahuSiteName: "Muara Pahu",
+    muarapahuSiteDesc:
+      "Muara Pahu is a sub-district in West Kutai Regency, East Kalimantan. Our operations here support coal transportation and logistics for the surrounding mining areas.",
+    muarapahuSiteProvince: "East Kalimantan",
+    muarapahuSiteRegency: "Kutai Barat",
   },
   id: {
     about: "TENTANG",
@@ -86,6 +106,26 @@ const translations: Record<Language, Record<string, string>> = {
     corporateGovernance: "Tata Kelola Perusahaan",
     awardsRecognition: "Penghargaan & Pengakuan",
     contact: "Kontak",
+    aboutUs: "TENTANG KAMI",
+    aboutUsParagraph1:
+      "Bayan Resources bergerak di bidang pertambangan open cut dengan empat proyek besar yang berlokasi di Kalimantan Timur dan Selatan, Indonesia.",
+    aboutUsParagraph2:
+      "Sebagai produsen batubara terintegrasi, Bayan memproduksi batubara yang berkisar dari batubara bituminus berkalori tinggi hingga batubara sub-bituminus berkadar belerang dan abu rendah.",
+    statsTitle: "PRODUKSI KAMI TERUS BERTUMBUH",
+    millionTons: "JUTA TON",
+    siteLocationsTitle: "LOKASI SITE KAMI",
+    province: "Provinsi",
+    regency: "Kabupaten",
+    senyiurSiteName: "Senyiur",
+    senyiurSiteDesc:
+      "Senyiur adalah salah satu desa di wilayah kecamatan Muara Ancalong, Kabupaten Kutai Timur, Provinsi Kalimantan Timur. PT Batara Dharma Persada mengoperasikan layanan coal hauling di area ini.",
+    senyiurSiteProvince: "Kalimantan Timur",
+    senyiurSiteRegency: "Kutai Timur",
+    muarapahuSiteName: "Muara Pahu",
+    muarapahuSiteDesc:
+      "Muara Pahu adalah sebuah kecamatan di Kabupaten Kutai Barat, Kalimantan Timur. Operasi kami di sini mendukung transportasi batubara dan logistik untuk area pertambangan sekitarnya.",
+    muarapahuSiteProvince: "Kalimantan Timur",
+    muarapahuSiteRegency: "Kutai Barat",
   },
 };
 
