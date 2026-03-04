@@ -5,12 +5,16 @@ import AboutUsContent from "./AboutUsContent";
 import ImageSlider from "./ImageSlider";
 import SiteLocations from "./SiteLocations";
 import StatsCounter from "./StatsCounter";
+import InfrastructureSection from "./InfrastructureSection";
+import ValueSection from "./ValueSection";
+import NewsSection from "./NewsSection";
+import CareerAwardsSection from "./CareerAwardsSection";
 
 export default function AboutUs() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-white py-20 sm:py-28"
+      className="relative overflow-hidden bg-white pt-20 pb-0 sm:pt-28 sm:pb-0"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -19,6 +23,10 @@ export default function AboutUs() {
         </div>
         <StatsCounter />
         <SiteLocations />
+        <InfrastructureSection />
+        <ValueSection />
+        <CareerAwardsSection />
+        <NewsSection />
       </div>
       <div className="relative mt-16 w-full">
         <Image

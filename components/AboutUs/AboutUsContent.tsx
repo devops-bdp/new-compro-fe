@@ -9,13 +9,13 @@ export default function AboutUsContent() {
   return (
     <div className="relative z-10 max-w-xl">
       <h2 className="text-3xl font-bold uppercase tracking-tight text-zinc-800 sm:text-4xl">
-        {t("aboutUs")}
+        {t("About Us")}
       </h2>
       <p className="mt-6 leading-relaxed text-zinc-600">
-        {t("aboutUsParagraph1")}
+        {t("loremIpsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.")}
       </p>
       <p className="mt-4 leading-relaxed text-zinc-600">
-        {t("aboutUsParagraph2")}
+        {t("loremIpsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.")}
       </p>
       <Link
         href="#about"
