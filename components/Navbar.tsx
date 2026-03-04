@@ -107,6 +107,10 @@ export default function Navbar() {
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const [openNavDropdown, setOpenNavDropdown] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(
+    null,
+  );
   const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navDropdownRef = useRef<HTMLDivElement>(null);
@@ -136,6 +140,7 @@ export default function Navbar() {
       setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
       setOpenNavDropdown(null);
       setIsSearchOpen(false);
+      setIsMobileMenuOpen(false);
     }
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -223,182 +228,338 @@ export default function Navbar() {
             </button>
           </div>
         ) : (
-          <>
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/B.png"
-            alt="Logo"
-            width={28}
-            height={28}
-            className="object-contain"
-            priority
-          />
-          <span
-            className={`text-sm font-bold uppercase italic tracking-[0.02em] transition-colors sm:text-base ${
-              isScrolled ? "text-black" : "text-white"
-            }`}
-          >
-            PT Batara Dharma Persada
-          </span>
-        </Link>
-
-        {/* Nav Links */}
-        <div
-          ref={navDropdownRef}
-          className="hidden items-center gap-8 pl-16 md:flex"
-        >
-          {navLinks.map((link) => (
-            <div
-              key={link.key}
-              className="relative"
-              onMouseEnter={() => {
-                if (link.hasDropdown) {
-                  clearCloseTimeout();
-                  setOpenNavDropdown(link.key);
-                }
-              }}
-              onMouseLeave={() => link.hasDropdown && scheduleClose()}
-            >
-              <a
-                href={link.href}
-                className={`text-xs font-bold uppercase tracking-[0.15em] transition-colors ${textClass} ${
-                  openNavDropdown === link.key ? "text-orange-500" : ""
+          <div className="flex w-full items-center justify-between gap-4">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-3">
+              <Image
+                src="/B.png"
+                alt="Logo"
+                width={28}
+                height={28}
+                className="object-contain"
+                priority
+              />
+              <span
+                className={`text-sm font-bold uppercase italic tracking-[0.02em] transition-colors sm:text-base ${
+                  isScrolled ? "text-black" : "text-white"
                 }`}
               >
-                {t(link.key)}
-              </a>
-              {link.hasDropdown && openNavDropdown === link.key && (
+                PT Batara Dharma Persada
+              </span>
+            </Link>
+
+            {/* Desktop nav links */}
+            <div
+              ref={navDropdownRef}
+              className="hidden items-center gap-8 pl-16 md:flex"
+            >
+              {navLinks.map((link) => (
                 <div
-                  className="fixed left-1/2 top-20 z-50 w-[min(80vw,900px)] -translate-x-1/2 animate-fade-in"
+                  key={link.key}
+                  className="relative"
                   onMouseEnter={() => {
-                    clearCloseTimeout();
-                    setOpenNavDropdown(link.key);
+                    if (link.hasDropdown) {
+                      clearCloseTimeout();
+                      setOpenNavDropdown(link.key);
+                    }
                   }}
-                  onMouseLeave={scheduleClose}
+                  onMouseLeave={() => link.hasDropdown && scheduleClose()}
                 >
-                  <div className="relative min-h-[50vh] overflow-hidden rounded-2xl border border-zinc-100 p-10 shadow-xl">
-                    {/* Background image - positioned from right */}
-                    <div className="pointer-events-none absolute inset-0">
-                      <Image
-                        src="/BG_CARD%20HOVER_NAVBAR.png"
-                        alt=""
-                        fill
-                        className="object-cover object-right"
-                      />
-                    </div>
-                    {/* Light overlay from left - fades to show graphic on right */}
+                  <a
+                    href={link.href}
+                    className={`text-xs font-bold uppercase tracking-[0.15em] transition-colors ${textClass} ${
+                      openNavDropdown === link.key ? "text-orange-500" : ""
+                    }`}
+                  >
+                    {t(link.key)}
+                  </a>
+                  {link.hasDropdown && openNavDropdown === link.key && (
                     <div
-                      className="pointer-events-none absolute inset-0 bg-linear-to-r from-white via-white/90 to-white/40"
-                      aria-hidden
-                    />
-                    <div className="relative flex gap-10">
-                      {/* Left: Image + description */}
-                      <div className="flex-1 min-w-0">
-                        <div className="aspect-video w-full overflow-hidden rounded-lg bg-zinc-100">
+                      className="fixed left-1/2 top-20 z-50 w-[min(80vw,900px)] -translate-x-1/2 animate-fade-in"
+                      onMouseEnter={() => {
+                        clearCloseTimeout();
+                        setOpenNavDropdown(link.key);
+                      }}
+                      onMouseLeave={scheduleClose}
+                    >
+                      <div className="relative min-h-[50vh] overflow-hidden rounded-2xl border border-zinc-100 p-10 shadow-xl">
+                        {/* Background image - positioned from right */}
+                        <div className="pointer-events-none absolute inset-0">
                           <Image
-                            src="/Test1.JPG"
+                            src="/BG_CARD%20HOVER_NAVBAR.png"
                             alt=""
-                            width={320}
-                            height={180}
-                            className="h-full w-full object-cover"
+                            fill
+                            className="object-cover object-right"
                           />
                         </div>
-                        <h3 className="mt-5 text-xl font-bold text-zinc-900">
-                          {t(link.key)}
-                        </h3>
-                        <p className="mt-3 text-sm leading-relaxed text-zinc-600">
-                          {t(`${link.key}Desc`)}
-                        </p>
-                        <Link
-                          href={link.href}
-                          className="mt-5 inline-block rounded border border-orange-500 px-5 py-2.5 text-sm font-medium text-orange-500 transition-colors hover:bg-orange-50"
-                          onClick={() => setOpenNavDropdown(null)}
-                        >
-                          {t("learnMore")}...
-                        </Link>
-                      </div>
-                      {/* Right: Link list */}
-                      <div className="relative flex flex-1 flex-col gap-3 pl-4">
-                        {link.subLinks?.map((subKey) => (
-                          <Link
-                            key={subKey}
-                            href={subKey === "fleet" ? "/our-fleet" : subKey === "operations" ? "/operations" : subKey === "leadership" ? "/our-team" : subKey === "departments" ? "/departments" : subKey === "careers" ? "/careers" : subKey === "organization" ? "/organization" : subKey === "contact" ? "/contact" : `#${subKey}`}
-                            className="relative z-10 text-sm text-zinc-700 transition-colors hover:text-orange-500"
-                            onClick={() => setOpenNavDropdown(null)}
-                          >
-                            {t(subKey)}
-                          </Link>
-                        ))}
+                        {/* Light overlay from left - fades to show graphic on right */}
+                        <div
+                          className="pointer-events-none absolute inset-0 bg-linear-to-r from-white via-white/90 to-white/40"
+                          aria-hidden
+                        />
+                        <div className="relative flex gap-10">
+                          {/* Left: Image + description */}
+                          <div className="flex-1 min-w-0">
+                            <div className="aspect-video w-full overflow-hidden rounded-lg bg-zinc-100">
+                              <Image
+                                src="/Test1.JPG"
+                                alt=""
+                                width={320}
+                                height={180}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                            <h3 className="mt-5 text-xl font-bold text-zinc-900">
+                              {t(link.key)}
+                            </h3>
+                            <p className="mt-3 text-sm leading-relaxed text-zinc-600">
+                              {t(`${link.key}Desc`)}
+                            </p>
+                            <Link
+                              href={link.href}
+                              className="mt-5 inline-block rounded border border-orange-500 px-5 py-2.5 text-sm font-medium text-orange-500 transition-colors hover:bg-orange-50"
+                              onClick={() => setOpenNavDropdown(null)}
+                            >
+                              {t("learnMore")}...
+                            </Link>
+                          </div>
+                          {/* Right: Link list */}
+                          <div className="relative flex flex-1 flex-col gap-3 pl-4">
+                            {link.subLinks?.map((subKey) => (
+                              <Link
+                                key={subKey}
+                                href={
+                                  subKey === "fleet"
+                                    ? "/our-fleet"
+                                    : subKey === "operations"
+                                      ? "/operations"
+                                      : subKey === "leadership"
+                                        ? "/our-team"
+                                        : subKey === "departments"
+                                          ? "/departments"
+                                          : subKey === "careers"
+                                            ? "/careers"
+                                            : subKey === "organization"
+                                              ? "/organization"
+                                              : subKey === "contact"
+                                                ? "/contact"
+                                                : `#${subKey}`
+                                }
+                                className="relative z-10 text-sm text-zinc-700 transition-colors hover:text-orange-500"
+                                onClick={() => setOpenNavDropdown(null)}
+                              >
+                                {t(subKey)}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
-              )}
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Right side: Language + Search */}
-        <div className="flex items-center gap-6">
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-              className={`flex items-center gap-1.5 text-xs font-normal uppercase tracking-[0.15em] transition-colors ${textClass}`}
-              aria-expanded={isLangDropdownOpen}
-              aria-haspopup="listbox"
-            >
-              {language === "en" ? "EN" : "ID"}
-              <ChevronDownIcon
-                className={`transition-transform ${isLangDropdownOpen ? "rotate-180" : ""}`}
-              />
-            </button>
-            {isLangDropdownOpen && (
-              <ul
-                className="absolute right-0 top-full mt-2 min-w-[80px] rounded-md border border-zinc-200 bg-white py-1 shadow-lg"
-                role="listbox"
+            {/* Right side: Language + Search / mobile toggler */}
+            <div className="flex items-center gap-4">
+              {/* Language + search (desktop) */}
+              <div className="hidden items-center gap-6 md:flex">
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+                    className={`flex items-center gap-1.5 text-xs font-normal uppercase tracking-[0.15em] transition-colors ${textClass}`}
+                    aria-expanded={isLangDropdownOpen}
+                    aria-haspopup="listbox"
+                  >
+                    {language === "en" ? "EN" : "ID"}
+                    <ChevronDownIcon
+                      className={`transition-transform ${
+                        isLangDropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {isLangDropdownOpen && (
+                    <ul
+                      className="absolute right-0 top-full mt-2 min-w-[80px] rounded-md border border-zinc-200 bg-white py-1 shadow-lg"
+                      role="listbox"
+                    >
+                      <li role="option" aria-selected={language === "en"}>
+                        <button
+                          onClick={() => handleLanguageSelect("en")}
+                          className={`block w-full px-4 py-2 text-left text-sm font-normal hover:bg-zinc-50 ${
+                            language === "en"
+                              ? "bg-orange-50 font-medium text-orange-600"
+                              : "text-zinc-700"
+                          }`}
+                        >
+                          English
+                        </button>
+                      </li>
+                      <li role="option" aria-selected={language === "id"}>
+                        <button
+                          onClick={() => handleLanguageSelect("id")}
+                          className={`block w-full px-4 py-2 text-left text-sm font-normal hover:bg-zinc-50 ${
+                            language === "id"
+                              ? "bg-orange-50 font-medium text-orange-600"
+                              : "text-zinc-700"
+                          }`}
+                        >
+                          Indonesia
+                        </button>
+                      </li>
+                    </ul>
+                  )}
+                </div>
+
+                <button
+                  ref={searchButtonRef}
+                  aria-label="Search"
+                  aria-expanded={isSearchOpen}
+                  onClick={() => setIsSearchOpen(true)}
+                  className={`transition-colors ${textClass}`}
+                >
+                  <SearchIcon />
+                </button>
+              </div>
+
+              {/* Mobile search button */}
+              <button
+                ref={searchButtonRef}
+                aria-label="Search"
+                aria-expanded={isSearchOpen}
+                onClick={() => setIsSearchOpen(true)}
+                className={`md:hidden ${textClass}`}
               >
-                <li role="option" aria-selected={language === "en"}>
-                  <button
-                    onClick={() => handleLanguageSelect("en")}
-                    className={`block w-full px-4 py-2 text-left text-sm font-normal hover:bg-zinc-50 ${
-                      language === "en"
-                        ? "bg-orange-50 font-medium text-orange-600"
-                        : "text-zinc-700"
-                    }`}
-                  >
-                    English
-                  </button>
-                </li>
-                <li role="option" aria-selected={language === "id"}>
-                  <button
-                    onClick={() => handleLanguageSelect("id")}
-                    className={`block w-full px-4 py-2 text-left text-sm font-normal hover:bg-zinc-50 ${
-                      language === "id"
-                        ? "bg-orange-50 font-medium text-orange-600"
-                        : "text-zinc-700"
-                    }`}
-                  >
-                    Indonesia
-                  </button>
-                </li>
-              </ul>
-            )}
-          </div>
+                <SearchIcon />
+              </button>
 
-          <button
-            ref={searchButtonRef}
-            aria-label="Search"
-            aria-expanded={isSearchOpen}
-            onClick={() => setIsSearchOpen(true)}
-            className={`transition-colors ${textClass}`}
-          >
-            <SearchIcon />
-          </button>
-        </div>
-          </>
+              {/* Mobile menu button */}
+              <button
+                type="button"
+                className={`inline-flex items-center justify-center rounded-md p-2 md:hidden ${textClass}`}
+                aria-label="Toggle navigation"
+                aria-expanded={isMobileMenuOpen}
+                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              >
+                {isMobileMenuOpen ? (
+                  <CloseIcon className="size-5" />
+                ) : (
+                  <span className="flex flex-col gap-1">
+                    <span className="block h-0.5 w-5 rounded bg-current" />
+                    <span className="block h-0.5 w-5 rounded bg-current" />
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
         )}
       </div>
+
+      {/* Mobile dropdown menu */}
+      {!isSearchOpen && isMobileMenuOpen && (
+        <div className="md:hidden">
+          <div className="mx-auto max-w-7xl space-y-2 border-t border-zinc-800/40 bg-black/90 px-4 pb-4 pt-3 text-sm text-white">
+            {navLinks.map((link) => {
+              const isOpen = openMobileDropdown === link.key;
+              return (
+                <div key={link.key} className="border-b border-white/5 pb-2">
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between py-2 text-left font-semibold tracking-[0.18em]"
+                    onClick={() =>
+                      setOpenMobileDropdown((prev) =>
+                        prev === link.key ? null : link.key,
+                      )
+                    }
+                  >
+                    <span>{t(link.key)}</span>
+                    {link.hasDropdown && (
+                      <ChevronDownIcon
+                        className={`size-4 transition-transform ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    )}
+                  </button>
+
+                  {link.hasDropdown && isOpen && (
+                    <div className="space-y-1 pl-3">
+                      {link.subLinks?.map((subKey) => (
+                        <Link
+                          key={subKey}
+                          href={
+                            subKey === "fleet"
+                              ? "/our-fleet"
+                              : subKey === "operations"
+                                ? "/operations"
+                                : subKey === "leadership"
+                                  ? "/our-team"
+                                  : subKey === "departments"
+                                    ? "/departments"
+                                    : subKey === "careers"
+                                      ? "/careers"
+                                      : subKey === "organization"
+                                        ? "/organization"
+                                        : subKey === "contact"
+                                          ? "/contact"
+                                          : `#${subKey}`
+                          }
+                          className="block py-1 text-xs text-zinc-200"
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            setOpenMobileDropdown(null);
+                          }}
+                        >
+                          {t(subKey)}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+
+                  {!link.hasDropdown && (
+                    <Link
+                      href={link.href}
+                      className="block py-1 text-xs text-zinc-200"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {t(link.key)}
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
+
+            {/* Mobile language selector */}
+            <div className="mt-3 flex items-center justify-between">
+              <span className="text-xs uppercase tracking-[0.18em]">
+                {t("language")}
+              </span>
+              <div className="inline-flex rounded-full border border-white/20 bg-white/5 p-1 text-xs">
+                <button
+                  onClick={() => handleLanguageSelect("en")}
+                  className={`px-3 py-1 rounded-full ${
+                    language === "en"
+                      ? "bg-white text-black"
+                      : "text-zinc-200"
+                  }`}
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => handleLanguageSelect("id")}
+                  className={`px-3 py-1 rounded-full ${
+                    language === "id"
+                      ? "bg-white text-black"
+                      : "text-zinc-200"
+                  }`}
+                >
+                  ID
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

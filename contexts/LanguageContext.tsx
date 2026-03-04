@@ -52,6 +52,7 @@ const translations: Record<Language, Record<string, string>> = {
     corporateGovernance: "Corporate Governance",
     awardsRecognition: "Awards & Recognition",
     contact: "Contact",
+    quickLinks: "Quick Links",
     // Our Unit / Fleet
     ourFleet: "Our Fleet",
     coreUnit: "The Core Unit",
@@ -258,6 +259,7 @@ const translations: Record<Language, Record<string, string>> = {
     corporateGovernance: "Tata Kelola Perusahaan",
     awardsRecognition: "Penghargaan & Pengakuan",
     contact: "Kontak",
+    quickLinks: "Tautan Cepat",
     ourFleet: "Armada Kami",
     coreUnit: "Unit Inti",
     coreUnitDesc: "Kami menggunakan Prime Mover dengan konfigurasi Double Vessel untuk operasi angkutan batubara berat.",

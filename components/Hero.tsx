@@ -25,9 +25,10 @@ export default function Hero() {
         />
       </div>
 
-      {/* Hero content */}
-      <div className="relative flex min-h-screen flex-col justify-center px-6 sm:px-12 lg:px-20">
-        <div className="max-w-2xl">
+      {/* Hero content - same container/padding as Navbar for alignment */}
+      <div className="relative flex min-h-screen flex-col justify-center">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
           <p className="text-lg font-bold uppercase tracking-wider text-white sm:text-xl">
             {t("ourCommitment")}
           </p>
@@ -43,6 +44,7 @@ export default function Hero() {
           >
             {t("learnMore")}
           </a>
+          </div>
         </div>
       </div>
 
